@@ -1,0 +1,16 @@
+# BaseApp
+Flask
+
+# manage.py
+Flask-Script
+
+# Database
+Flask-SQLAlchemy
+Flask-Migrate
+
+# accounts
+Flask-Security
+
+# admin
+Flask-Admin
+Flask-BabelEx
