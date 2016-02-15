@@ -19,13 +19,14 @@ app_instance = None
 
 class BaseApp(object):
     _extensions = [
-        'settings',
+        'environments',
         'logs',
         'database',
         'security',
         'babel',
         'signals',
         'admin',
+        'restful',
         'blueprints',
     ]
 

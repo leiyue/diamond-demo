@@ -7,7 +7,7 @@ from __future__ import absolute_import, division, print_function, with_statement
 
 import flask
 
-from base import db
+from ... import db
 
 
 class CRUDMixin(object):

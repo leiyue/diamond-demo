@@ -4,6 +4,9 @@ Flask
 # manage.py
 Flask-Script
 
+# Environments
+Flask-Environments
+
 # Database
 Flask-SQLAlchemy
 Flask-Migrate
@@ -14,3 +17,6 @@ Flask-Security
 # admin
 Flask-Admin
 Flask-BabelEx
+
+# restful
+Flask-Restful

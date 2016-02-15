@@ -3,6 +3,6 @@
 # @Author  : leiyue (mr.leiyue@gmail.com)
 # @Link    : https://leiyue.wordpress.com/
 
-
-from .public import public_blueprint
 from .admin import AdminIndex, AdminUser, AdminRole
+from .api import HelloWorldResource
+from .public import public_blueprint
