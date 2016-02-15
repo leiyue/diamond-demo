@@ -5,7 +5,10 @@
 
 from __future__ import absolute_import, division, print_function, with_statement, unicode_literals
 
-from flask import Flask
+import os
+
+import yaml
+from flask import Flask as BaseFlask, Config as BaseConfig
 
 from .extensions import *
 
@@ -17,9 +20,32 @@ except ImportError:
 app_instance = None
 
 
+class Config(BaseConfig):
+    def from_yaml(self, config_file):
+        env = os.environ.get('FLASK_ENV', 'DEVELOPMENT')
+        self['ENVIRONMENT'] = env.lower()
+
+        with open(config_file) as f:
+            c = yaml.load(f)
+
+        c = c.get(env, c)
+
+        for key in c.iterkeys():
+            if key.isupper():
+                self[key] = c[key]
+
+
+class Flask(BaseFlask):
+    def make_config(self, instance_relative=False):
+        root_path = self.root_path
+        if instance_relative:
+            root_path = self.instance_path
+        return Config(root_path, self.default_config)
+
+
 class BaseApp(object):
     _extensions = [
-        'environments',
+        'settings',
         'logs',
         'database',
         'security',

@@ -91,9 +91,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
@@ -130,8 +128,6 @@ coverage.xml
 *.mo
 *.pot
 
-# Django stuff:
-*.log
 
 # Flask stuff
 *.db

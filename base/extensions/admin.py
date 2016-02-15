@@ -12,7 +12,7 @@ from werkzeug.local import LocalProxy
 _security = LocalProxy(lambda: flask.current_app.extensions['security'])
 
 
-def init_admin(self, index_view=None, app_models=None):
+def init_admin(self, index_view=None):
     from .. import db
     from ..models import User, Role
     from ..views import AdminIndex, AdminUser, AdminRole

@@ -5,5 +5,5 @@
 
 from .crud import CRUDMixin
 from .marshmallow import MarshmallowMixin
+from .timestamp import TimestampMixin
 
-# Todo: add timestamp mixin

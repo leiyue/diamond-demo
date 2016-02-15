@@ -2,31 +2,34 @@ COMMON: &common
   DEBUG: False
   TESTING: False
   # BaseApp
-  PROJECT_NAME: 'DiamondDemo'
+  PROJECT_NAME: DiamondDemo
   # logs
-  LOG: 'var/log/dev.log'
-  LOG_LEVEL: 'DEBUG'
+  LOG: var/log/dev.log
+  LOG_LEVEL: DEBUG
   # database
   SQLALCHEMY_TRACK_MODIFICATIONS: True
   # security
-  SECRET_KEY: 'YouShouldNeverGuessItOut'
+  SECRET_KEY: YouShouldNeverGuessItOut
   SECURITY_REGISTERABLE: False
   SECURITY_CHANGEABLE: True
-  SECURITY_LOGIN_URL: '/'
-  SECURITY_POST_LOGIN_VIEW: '/admin'
-  SECURITY_LOGIN_USER_TEMPLATE: 'security/extended_login_user.html'
+  SECURITY_LOGIN_URL: /
+  SECURITY_POST_LOGIN_VIEW: /admin
+  SECURITY_LOGIN_USER_TEMPLATE: security/extended_login_user.html
   # babel
-  BABEL_DEFAULT_LOCALE: 'zh_Hans_CN'
+  BABEL_DEFAULT_LOCALE: zh_Hans_CN
 
 DEVELOPMENT: &development
   <<: *common
   DEBUG: True
+  SQLALCHEMY_DATABASE_URI: sqlite:///development.db
 
 PRODUCTION: &production
   <<: *common
   DEBUG: False
   TESTING: False
+  SQLALCHEMY_DATABASE_URI: sqlite:///production.db
 
 TESTING: &testing
   <<: *common
   TESTING: True
+  SQLALCHEMY_DATABASE_URI: sqlite:// # in-memory

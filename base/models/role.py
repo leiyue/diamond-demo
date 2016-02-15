@@ -7,11 +7,11 @@ from __future__ import absolute_import, division, print_function, with_statement
 
 from flask.ext.security import RoleMixin
 
-from .mixins import CRUDMixin, MarshmallowMixin
+from .mixins import CRUDMixin, MarshmallowMixin, TimestampMixin
 from .. import db
 
 
-class Role(db.Model, RoleMixin, CRUDMixin, MarshmallowMixin):
+class Role(db.Model, RoleMixin, CRUDMixin, MarshmallowMixin, TimestampMixin):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(80), unique=True)
     description = db.Column(db.String(255))

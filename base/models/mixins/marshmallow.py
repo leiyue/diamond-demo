@@ -14,7 +14,7 @@ class MarshmallowMixin(object):
         return self.__schema__().dump(self).data
 
     def dumps(self):
-        return self.__shema__().dumps(self).data
+        return self.__schema__().dumps(self).data
 
     def dumpf(self, file_handle):
         file_handle.write(self.dumps())
