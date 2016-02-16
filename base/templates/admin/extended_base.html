@@ -24,11 +24,10 @@
 
 
 {% block tail %}
-
     <div id="footer">
         {% block footer %}
-            <p class="text-center">{{ config["PROJECT_NAME"] }}</p>
+            <p class="text-center">&copy; {{ config["AUTHOR_NAME"] or config["COMPANY_NAME"] or config["PROJECT_NAME"] }}
+                2016</p>
         {% endblock %}
     </div>
-
 {% endblock %}

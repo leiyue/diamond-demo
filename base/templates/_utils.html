@@ -1,26 +1,3 @@
 {% macro icon(type=None, extra_classes=[]) -%}
     <span{{ ({'class': (['glyphicon', 'glyphicon-' + type] + extra_classes)|join(' ')})|xmlattr }}{{ kwargs|xmlattr }}></span>
 {%- endmacro %}
-
-{% macro render_field_with_errors(field) %}
-    <div class="form-group{% if field.errors %} has-error{% endif %}">
-        {{ field.label }}
-        {{ field(**kwargs) }}
-        {% if field.errors %}
-            {% for error in field.errors %}
-                <span class="help-block">{{ error }}</span>
-            {% endfor %}
-        {% endif %}
-    </div>
-{% endmacro %}
-
-{% macro render_boolean_field(field) %}
-    <div class="checkbox">
-    <label>
-        {{ field(**kwargs) }}{{ field.label }}
-    </label>
-{% endmacro %}
-
-{% macro render_field(field) %}
-    <p>{{ field(**kwargs) }}</p>
-{% endmacro %}

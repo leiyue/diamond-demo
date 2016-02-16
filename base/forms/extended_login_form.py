@@ -16,13 +16,21 @@ _remember_default = LocalProxy(lambda: flask.current_app.config.get('SECURITY_DE
 
 class ExtendedLoginForm(security.forms.Form, security.forms.NextFormMixin):
     user = None
-    login_name = StringField('用户名')
-    password = PasswordField('密码')
-    remember = BooleanField('使用自动登录', default=_remember_default)
+    login_name = StringField('用户名', validators=[security.forms.email_required])
+    password = PasswordField('密码', validators=[security.forms.password_required])
+    remember = BooleanField('自动登录', default='checked' if _remember_default else None)
     submit = SubmitField('登录')
 
     def validate(self):
         if not super(ExtendedLoginForm, self).validate():
+            return False
+
+        if self.login_name.data.strip() == '':
+            self.login_name.errors.append(security.utils.get_message('EMAIL_NOT_PROVIDED')[0])
+            return False
+
+        if self.password.data.strip() == '':
+            self.password.errors.append(security.utils.get_message('PASSWORD_NOT_PROVIDED')[0])
             return False
 
         self.user = _datastore.get_user(self.login_name.data)

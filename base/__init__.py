@@ -87,7 +87,6 @@ class BaseApp(object):
             self.app.teardown_request(self.teardown)
 
     def super(self, extension_name, **kwargs):
-
         init_method = 'init_{0}'.format(extension_name)
         # ensure the global version is called
         method_to_call = globals()[init_method]

@@ -12,6 +12,7 @@ def init_settings(self):
     self.app.config.from_yaml(
         os.path.join(self.app.root_path, os.path.pardir, 'etc', 'conf', 'settings.yaml'))
 
+
     # database
     self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{0}'.format(
         os.path.join(self.app.root_path, os.path.pardir, 'var', 'db', 'dev.db'))
