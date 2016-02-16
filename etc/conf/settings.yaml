@@ -2,6 +2,7 @@ COMMON: &common
   DEBUG: False
   TESTING: False
   # BaseApp
+  AUTHOR_NAME: leiyue
   PROJECT_NAME: DiamondDemo
   # logs
   LOG: var/log/dev.log
