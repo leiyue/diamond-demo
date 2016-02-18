@@ -8,10 +8,10 @@ from __future__ import absolute_import, division, print_function, with_statement
 import flask
 from flask.ext.security.utils import encrypt_password
 
-from ..core import AdminModelView
+from ._mixin import AdminUserModelView
 
 
-class AdminUser(AdminModelView):
+class AdminUser(AdminUserModelView):
     page_size = 30
     can_create = True
     can_delete = False

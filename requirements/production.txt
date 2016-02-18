@@ -11,6 +11,10 @@ Flask-Environments
 Flask-SQLAlchemy
 Flask-Migrate
 
+# Orm
+Flask-Marshmallow
+marshmallow-sqlalchemy
+
 # accounts
 Flask-Security
 

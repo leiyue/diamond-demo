@@ -11,7 +11,7 @@ from flask.ext.admin import BaseView
 from flask.ext.admin.contrib.sqla import ModelView
 
 
-class AdminMixin(object):
+class AdminUserMixin(object):
     def is_accessible(self):
         return security.current_user.has_role('Admin')
 
@@ -19,9 +19,9 @@ class AdminMixin(object):
         return flask.redirect(security.url_for_security('login'))
 
 
-class AdminView(AdminMixin, BaseView):
+class AdminUserView(AdminUserMixin, BaseView):
     pass
 
 
-class AdminModelView(AdminMixin, ModelView):
+class AdminUserModelView(AdminUserMixin, ModelView):
     pass

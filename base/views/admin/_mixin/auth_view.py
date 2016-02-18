@@ -11,7 +11,7 @@ from flask.ext.admin import BaseView
 from flask.ext.admin.contrib.sqla import ModelView
 
 
-class AuthMixin(object):
+class AuthUserMixin(object):
     def is_accessible(self):
         return security.current_user.is_authenticated
 
@@ -19,9 +19,9 @@ class AuthMixin(object):
         return flask.redirect(security.url_for_security('login'))
 
 
-class AuthView(AuthMixin, BaseView):
+class AuthUserView(AuthUserMixin, BaseView):
     pass
 
 
-class AuthModelView(AuthMixin, ModelView):
+class AuthUserModelView(AuthUserMixin, ModelView):
     pass

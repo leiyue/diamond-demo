@@ -4,5 +4,4 @@
 # @Link    : https://leiyue.wordpress.com/
 
 from .admin import AdminIndex, AdminUser, AdminRole
-from .api import HelloWorldResource
 from .public import public_blueprint

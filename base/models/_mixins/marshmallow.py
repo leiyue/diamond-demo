@@ -5,10 +5,16 @@
 
 from __future__ import absolute_import, division, print_function, with_statement, unicode_literals
 
-from ... import db
-
 
 class MarshmallowMixin(object):
+    @classmethod
+    def dump_all(cls):
+        return cls.__schema__().dump(cls.query.all(), many=True).data
+
+    @classmethod
+    def load_all(cls, python_objects):
+        return cls.__schema__().load(python_objects, many=True).data
+
     # dump
     def dump(self):
         return self.__schema__().dump(self).data
@@ -22,13 +28,11 @@ class MarshmallowMixin(object):
     # load
     @classmethod
     def load(cls, python_obj):
-        obj = cls.__schema__().load(python_obj)
-        return cls.create(**obj.data)
+        return cls.__schema__().load(python_obj).data
 
     @classmethod
     def loads(cls, buf):
-        obj = cls.__schema__().loads(buf)
-        return cls.create(**obj.data)
+        return cls.__schema__().loads(buf)
 
     @classmethod
     def loadf(cls, file_handle):
@@ -50,19 +54,11 @@ class MarshmallowMixin(object):
     # load_all
     @classmethod
     def load_all(cls, python_objects):
-        objs = cls.__schema__().load(python_objects, many=True)
-        for obj in objs.data:
-            cls.create(_commit=True, **obj)
-        db.session.commit()
-        db.session.flush()
+        return cls.__schema__().load(python_objects, many=True)
 
     @classmethod
     def loads_all(cls, buf):
-        objs = cls.__schema__().loads(buf, many=True)
-        for obj in objs.data:
-            cls.create(_commit=True, **obj)
-        db.session.commit()
-        db.session.flush()
+        return cls.__schema__().loads(buf, many=True)
 
     @classmethod
     def loadf_all(cls, file_handle):

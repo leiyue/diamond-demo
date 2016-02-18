@@ -7,10 +7,10 @@ from __future__ import absolute_import, division, print_function, with_statement
 
 from flask.ext.admin import AdminIndexView, expose
 
-from ..core.admin_view import AdminMixin
+from ._mixin import AdminUserMixin
 
 
-class AdminIndex(AdminMixin, AdminIndexView):
+class AdminIndex(AdminUserMixin, AdminIndexView):
     @expose()
     def index(self):
         return self.render('admin/extended_index.html')

@@ -12,8 +12,8 @@ from flask.ext.security import UserMixin
 from flask.ext.security.utils import encrypt_password
 from werkzeug.local import LocalProxy
 
-from .mixins import CRUDMixin, MarshmallowMixin
-from .. import db
+from ._mixins import CRUDMixin, MarshmallowMixin
+from .. import db, marshmallow
 
 _security = LocalProxy(lambda: flask.current_app.extensions['security'])
 
@@ -28,10 +28,10 @@ class User(db.Model, UserMixin, CRUDMixin, MarshmallowMixin):
     password = db.Column('password', db.String(255), nullable=False)
     active = db.Column(db.Boolean())
     confirmed_at = db.Column(db.DateTime())
-    last_login_at = db.Column(db.DateTime())
     current_login_at = db.Column(db.DateTime())
-    last_login_ip = db.Column(db.String(255))
     current_login_ip = db.Column(db.String(255))
+    last_login_at = db.Column(db.DateTime())
+    last_login_ip = db.Column(db.String(255))
     login_count = db.Column(db.Integer(), default=0)
     roles = db.relationship('Role',
                             enable_typechecks=False,
@@ -90,3 +90,12 @@ class User(db.Model, UserMixin, CRUDMixin, MarshmallowMixin):
         _security.datastore.delete_user(email='admin')
         _security.datastore.delete_user(email='guest')
         db.session.commit()
+
+
+class UserSchema(marshmallow.ModelSchema):
+    class Meta:
+        model = User
+        exclude = ('password',)
+
+
+User.__schema__ = UserSchema

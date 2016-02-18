@@ -13,6 +13,8 @@ from ... import db
 class CRUDMixin(object):
     __table_args__ = {'extend_existing': True}
 
+    id = db.Column(db.Integer, primary_key=True)
+
     @classmethod
     def find(cls, **kwargs):
         return cls.query.filter_by(**kwargs).first()
@@ -35,6 +37,7 @@ class CRUDMixin(object):
 
     @classmethod
     def create(cls, _commit=True, **kwargs):
+        flask.current_app.logger.debug(kwargs)
         instance = cls(**kwargs)
         obj = instance.save(_commit=_commit)
         flask.current_app.logger.debug('Created {0}'.format(unicode(obj)))

@@ -11,5 +11,5 @@ from wtforms import PasswordField
 _confirm_password_equal = EqualTo('password', message='RETYPE_PASSWORD_MISMATCH')
 
 
-class PasswordConfirmFormMixin(object):
+class PasswordConfirmField(object):
     password_confirm = PasswordField('重复密码', validators=[_confirm_password_equal])

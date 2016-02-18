@@ -48,6 +48,7 @@ class BaseApp(object):
         'settings',
         'logs',
         'database',
+        'marshmallow',
         'security',
         'babel',
         'signals',

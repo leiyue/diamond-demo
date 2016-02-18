@@ -6,8 +6,9 @@
 from __future__ import absolute_import, division, print_function, with_statement, unicode_literals
 
 from flask.ext.security import RoleMixin
+from marshmallow import Schema, fields, post_load
 
-from .mixins import CRUDMixin, MarshmallowMixin, TimestampMixin
+from ._mixins import CRUDMixin, MarshmallowMixin, TimestampMixin
 from .. import db
 
 
@@ -24,3 +25,16 @@ class Role(db.Model, RoleMixin, CRUDMixin, MarshmallowMixin, TimestampMixin):
 
     def __unicode__(self):
         return self.name
+
+
+class RoleSchema(Schema):
+    id = fields.Integer(dump_only=True)
+    name = fields.String()
+    description = fields.String()
+
+    @post_load
+    def make_role(self, data):
+        return Role.create(**data)
+
+
+Role.__schema__ = RoleSchema

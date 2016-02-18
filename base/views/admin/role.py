@@ -5,10 +5,10 @@
 
 from __future__ import absolute_import, division, print_function, with_statement, unicode_literals
 
-from ..core import AdminModelView
+from ._mixin import AdminUserModelView
 
 
-class AdminRole(AdminModelView):
+class AdminRole(AdminUserModelView):
     page_size = 30
     can_create = True
     can_delete = False
