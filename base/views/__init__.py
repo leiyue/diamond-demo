@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-# @Date    : 2016-02-14 0:28
-# @Author  : leiyue (mr.leiyue@gmail.com)
-# @Link    : https://leiyue.wordpress.com/
+# -*- date: 2016-02-14 0:28 -*-
 
 from .admin import AdminIndex, AdminUser, AdminRole
 from .public import public_blueprint

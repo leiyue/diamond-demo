@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-# @Date    : 2016-02-13 17:25
-# @Author  : leiyue (mr.leiyue@gmail.com)
-# @Link    : https://leiyue.wordpress.com/
+# -*- date: 2016-02-13 17:25 -*-
 
-from __future__ import absolute_import, division, print_function, with_statement, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        with_statement, unicode_literals)
 
 import datetime
 
@@ -38,6 +37,7 @@ class User(db.Model, UserMixin, CRUDMixin):
                             enable_typechecks=False,
                             secondary=roles_users,
                             backref=db.backref('users', lazy='dynamic'))
+    posts = db.relationship('Post', backref='author', lazy='dynamic')
 
     def __repr__(self):
         return '<{class_name}({name})>'.format(class_name=self.__class__.__name__, name=self.email)

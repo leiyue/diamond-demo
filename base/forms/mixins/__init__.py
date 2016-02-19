@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-# @Date    : 2016-02-16 1:22
-# @Author  : leiyue (mr.leiyue@gmail.com)
-# @Link    : https://leiyue.wordpress.com/
+# -*- date: 2016-02-16 1:22 -*-
 
 from .email_field import EmailField
 from .valid_email_field import ValidEmailField

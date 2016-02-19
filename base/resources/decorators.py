@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-# @Date    : 2016-02-18 1:18
-# @Author  : leiyue (mr.leiyue@gmail.com)
-# @Link    : https://leiyue.wordpress.com/
+# -*- date: 2016-02-18 1:18 -*-
 
-from __future__ import absolute_import, division, print_function, with_statement, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        with_statement, unicode_literals)
 
 from functools import wraps
 

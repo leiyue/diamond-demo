@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-# @Date    : 2016-02-13 16:44
-# @Author  : leiyue (mr.leiyue@gmail.com)
-# @Link    : https://leiyue.wordpress.com/
+# -*- date: 2016-02-13 16:44 -*-
 
 from .settings import init_settings
 from .logs import init_logs

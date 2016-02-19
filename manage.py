@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
-# @Date    : 2016-02-13 15:14
-# @Author  : leiyue (mr.leiyue@gmail.com)
-# @Link    : https://leiyue.wordpress.com/
+# -*- date: 2016-02-13 15:14 -*-
 
-from __future__ import absolute_import, division, print_function, with_statement, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        with_statement, unicode_literals)
 
 import alembic
 from flask.ext.migrate import Migrate, MigrateCommand, upgrade
 from flask.ext.script import Manager, Shell, Server
 from flask_script.commands import Clean, ShowUrls
 
-from base import create_app, db, ma, models
+from base import ma, models
+from blog import create_app, db
+
 
 app = create_app()
 migrate = Migrate(app, db, directory="var/migrations")

@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-# @Date    : 2016-02-17 14:51
-# @Author  : leiyue (mr.leiyue@gmail.com)
-# @Link    : https://leiyue.wordpress.com/
+# -*- date: 2016-02-17 14:51 -*-
 
-from __future__ import absolute_import, division, print_function, with_statement, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        with_statement, unicode_literals)
 
 from flask.ext.restful import Resource, abort
-from flask.ext.security import auth_token_required, roles_required
+from flask.ext.security import roles_required
 from flask.ext.security.utils import encrypt_password
 
 from .decorators import load_with, dump_with
@@ -26,7 +25,7 @@ class UserListResource(Resource):
         instances = self.model.query.all()
         return instances
 
-    # @roles_required('Admin')
+    @roles_required('Admin')
     @load_with(_schema)
     @dump_with(_schema)
     def post(self, data):
@@ -49,12 +48,14 @@ class UserItemResource(Resource):
             abort(404, message='Resource does not exists')
         return instance
 
+    @roles_required('Admin')
     def delete(self, instance_id):
         instance = self.model.get_by_id(instance_id)
         if not instance:
             abort(404, message='Resource does not exists')
         return instance.delete() and '', 204
 
+    @roles_required('Admin')
     @load_with(_schema)
     @dump_with(_schema)
     def put(self, data, instance_id):

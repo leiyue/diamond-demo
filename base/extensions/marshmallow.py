@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-# @Date    : 2016-02-17 14:40
-# @Author  : leiyue (mr.leiyue@gmail.com)
-# @Link    : https://leiyue.wordpress.com/
+# -*- date: 2016-02-17 14:40 -*-
 
-from __future__ import absolute_import, division, print_function, with_statement, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        with_statement, unicode_literals)
 
 from flask.ext.marshmallow import Marshmallow
 
