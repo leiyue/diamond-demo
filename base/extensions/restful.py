@@ -24,14 +24,14 @@ api = Api(errors=_errors)
 
 
 def init_restful(self):
-    from ..resources import UserList, UserItem
-    from ..resources import RoleList, RoleItem
+    from ..resources import UserListResource, UserItemResource
+    from ..resources import RoleListResource, RoleItemResource
 
     # Todo: think about flask-restful usage
-    api.add_resource(UserList, '/api/user')
-    api.add_resource(UserItem, '/api/user/<int:user_id>')
-    api.add_resource(RoleList, '/api/role')
-    api.add_resource(RoleItem, '/api/role/<int:role_id>')
+    api.add_resource(UserListResource, '/api/user')
+    api.add_resource(UserItemResource, '/api/user/<int:instance_id>')
+    api.add_resource(RoleListResource, '/api/role')
+    api.add_resource(RoleItemResource, '/api/role/<int:instance_id>')
 
     # api_blueprint = Blueprint('api', __name__, url_prefix='/api')
     api.init_app(self.app)

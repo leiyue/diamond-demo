@@ -4,6 +4,5 @@
 # @Link    : https://leiyue.wordpress.com/
 
 from .crud import CRUDMixin
-from .marshmallow import MarshmallowMixin
 from .timestamp import TimestampMixin
 

@@ -12,8 +12,9 @@ from flask.ext.security import UserMixin
 from flask.ext.security.utils import encrypt_password
 from werkzeug.local import LocalProxy
 
-from ._mixins import CRUDMixin, MarshmallowMixin
-from .. import db, marshmallow
+from ._mixins import CRUDMixin
+from .role import RoleSchema
+from .. import db, ma
 
 _security = LocalProxy(lambda: flask.current_app.extensions['security'])
 
@@ -22,7 +23,7 @@ roles_users = db.Table('roles_users',
                        db.Column('role_id', db.Integer(), db.ForeignKey('role.id')))
 
 
-class User(db.Model, UserMixin, CRUDMixin, MarshmallowMixin):
+class User(db.Model, UserMixin, CRUDMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), unique=True)
     password = db.Column('password', db.String(255), nullable=False)
@@ -72,6 +73,7 @@ class User(db.Model, UserMixin, CRUDMixin, MarshmallowMixin):
             for role_name in roles:
                 new_user.add_role(role_name)
         flask.current_app.logger.debug('Created user {0}'.format(email))
+        return new_user
 
     @classmethod
     def add_system_users(cls):
@@ -92,10 +94,24 @@ class User(db.Model, UserMixin, CRUDMixin, MarshmallowMixin):
         db.session.commit()
 
 
-class UserSchema(marshmallow.ModelSchema):
+class UserSchema(ma.Schema):
     class Meta:
-        model = User
+        fields = ('id',
+                  'email',
+                  'password',
+                  'active',
+                  'confirmed_at',
+                  'current_login_at',
+                  'current_login_ip',
+                  'last_login_at',
+                  'last_login_ip',
+                  'login_count',
+                  'roles',
+                  '_links')
         exclude = ('password',)
 
-
-User.__schema__ = UserSchema
+    roles = ma.Nested(RoleSchema,  many=True)
+    _links = ma.Hyperlinks({
+        'self': ma.URLFor('useritemresource', instance_id='<id>'),
+        'collection': ma.URLFor('userlistresource')
+    })

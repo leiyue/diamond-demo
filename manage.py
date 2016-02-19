@@ -10,14 +10,14 @@ from flask.ext.migrate import Migrate, MigrateCommand, upgrade
 from flask.ext.script import Manager, Shell, Server
 from flask_script.commands import Clean, ShowUrls
 
-from base import create_app, db, models
+from base import create_app, db, ma, models
 
 app = create_app()
 migrate = Migrate(app, db, directory="var/migrations")
 
 
 def _make_context():
-    return dict(app=app, db=db, models=models)
+    return dict(app=app, db=db, ma=ma, models=models)
 
 
 manager = Manager(app)

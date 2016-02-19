@@ -7,8 +7,8 @@ from __future__ import absolute_import, division, print_function, with_statement
 
 from flask.ext.marshmallow import Marshmallow
 
-marshmallow = Marshmallow()
+ma = Marshmallow()
 
 
 def init_marshmallow(self):
-    marshmallow.init_app(self.app)
+    ma.init_app(self.app)

@@ -17,11 +17,15 @@ class CRUDMixin(object):
 
     @classmethod
     def find(cls, **kwargs):
+        return cls.query.filter_by(**kwargs).all()
+
+    @classmethod
+    def find_one(cls, **kwargs):
         return cls.query.filter_by(**kwargs).first()
 
     @classmethod
     def find_or_create(cls, _commit=True, **kwargs):
-        obj = cls.find(**kwargs)
+        obj = cls.find_one(**kwargs)
         if not obj:
             obj = cls.create(_commit=_commit, **kwargs)
         return obj
@@ -37,7 +41,6 @@ class CRUDMixin(object):
 
     @classmethod
     def create(cls, _commit=True, **kwargs):
-        flask.current_app.logger.debug(kwargs)
         instance = cls(**kwargs)
         obj = instance.save(_commit=_commit)
         flask.current_app.logger.debug('Created {0}'.format(unicode(obj)))

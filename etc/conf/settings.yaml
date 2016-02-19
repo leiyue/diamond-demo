@@ -16,6 +16,8 @@ COMMON: &common
   SECURITY_LOGIN_URL: /
   SECURITY_POST_LOGIN_VIEW: /admin
   SECURITY_LOGIN_USER_TEMPLATE: security/extended_login_user.html
+  # wtf
+  WTF_CSRF_ENABLED: False  # restfull api login
   # babel
   BABEL_DEFAULT_LOCALE: zh_Hans_CN
 

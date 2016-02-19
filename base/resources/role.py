@@ -5,58 +5,55 @@
 
 from __future__ import absolute_import, division, print_function, with_statement, unicode_literals
 
-from flask.ext.restful import Resource, fields, reqparse, marshal_with, abort
-from sqlalchemy.exc import IntegrityError
+from flask.ext.restful import Resource, abort
 
-from ..models import Role
+from .decorators import load_with, dump_with
+from ..models import Role, RoleSchema
 
-_role_fields = {
-    'id': fields.Integer,
-    'name': fields.String,
-    'description': fields.String
-}
-
-_parser = reqparse.RequestParser()
-_parser.add_argument('name', type=str, required=True, help='Role must has a name.')
-_parser.add_argument('description', type=str)
+_schema = RoleSchema()
+_list_schema = RoleSchema(many=True)
 
 
-class RoleList(Resource):
+class RoleListResource(Resource):
+    # method_decorators = [auth_token_required]
+    model = Role
+
+    @dump_with(_list_schema)
     def get(self):
-        return Role.dumps_all()
+        instances = self.model.query.all()
+        return instances
 
-    @marshal_with(_role_fields)
-    def post(self):
-        args = _parser.parse_args()
-        try:
-            # role = Role.create(**args)
-            role = Role.load(args)
-        except IntegrityError:
-            abort(400)
-        return Role.dump(role)
+    @load_with(_schema)
+    @dump_with(_schema)
+    def post(self, data):
+        instance = self.model.find_one(name=data['name'])
+        if instance:
+            abort(409, message='Resource already exists')
+        instance = self.model.create(**data)
+        return instance
 
 
-class RoleItem(Resource):
-    def get(self, role_id):
-        role = Role.get_by_id(role_id)
-        if role:
-            return Role.dump(role)
-        else:
-            abort(404)
+class RoleItemResource(Resource):
+    model = Role
 
-    def delete(self, role_id):
-        role = Role.get_by_id(role_id)
-        if role:
-            return role.delete() and '', 204
-        else:
-            abort(404)
+    @dump_with(_schema)
+    def get(self, instance_id):
+        instance = self.model.get_by_id(instance_id)
+        if not instance:
+            abort(404, message='Resource does not exists')
+        return instance
 
-    @marshal_with(_role_fields)
-    def put(self, role_id):
-        args = _parser.parse_args()
-        role = Role.get_by_id(role_id)
-        if role:
-            role.update(**args)
-            return Role.dump(role)
-        else:
-            abort(404)
+    def delete(self, instance_id):
+        instance = self.model.get_by_id(instance_id)
+        if not instance:
+            abort(404, message='Resource does not exists')
+        return instance.delete() and '', 204
+
+    @load_with(_schema)
+    @dump_with(_schema)
+    def put(self, data, instance_id):
+        instance = self.model.get_by_id(instance_id)
+        if not instance:
+            abort(404, message='Resource does not exists')
+        instance = instance.update(**data)
+        return instance

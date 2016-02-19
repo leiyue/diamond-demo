@@ -3,5 +3,5 @@
 # @Author  : leiyue (mr.leiyue@gmail.com)
 # @Link    : https://leiyue.wordpress.com/
 
-from .role import Role
-from .user import User
+from .role import Role, RoleSchema
+from .user import User, UserSchema
