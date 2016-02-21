@@ -21,6 +21,7 @@ Flask-Security
 # admin
 Flask-Admin
 Flask-BabelEx
+PIL  # for CKEditor browse
 
 # restful
 Flask-Restful

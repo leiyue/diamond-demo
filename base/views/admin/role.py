@@ -6,8 +6,10 @@ from __future__ import (absolute_import, division, print_function,
 
 from ._mixin import AdminUserModelView
 
+__all__ = ['RoleAdmin']
 
-class AdminRole(AdminUserModelView):
+
+class RoleAdmin(AdminUserModelView):
     page_size = 30
     can_create = True
     can_delete = False

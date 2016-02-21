@@ -9,8 +9,10 @@ from flask.ext.security.utils import encrypt_password
 
 from ._mixin import AdminUserModelView
 
+__all__ = ['UserAdmin']
 
-class AdminUser(AdminUserModelView):
+
+class UserAdmin(AdminUserModelView):
     page_size = 30
     can_create = True
     can_delete = False

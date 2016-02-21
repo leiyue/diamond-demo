@@ -6,6 +6,8 @@ from __future__ import (absolute_import, division, print_function,
 
 from flask.ext.assets import Environment, Bundle
 
+__all__ = ['assets', 'init_assets']
+
 assets = Environment()
 
 

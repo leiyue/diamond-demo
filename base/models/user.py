@@ -15,6 +15,8 @@ from ._mixins import CRUDMixin
 from .role import RoleSchema
 from .. import db, ma
 
+__all__ = ['User', 'UserSchema', 'UserExposeSchema']
+
 _security = LocalProxy(lambda: flask.current_app.extensions['security'])
 
 roles_users = db.Table('roles_users',
@@ -110,7 +112,20 @@ class UserSchema(ma.Schema):
                   '_links')
         exclude = ('password',)
 
-    roles = ma.Nested(RoleSchema,  many=True)
+    roles = ma.Nested(RoleSchema, many=True)
+    _links = ma.Hyperlinks({
+        'self': ma.URLFor('useritemresource', instance_id='<id>'),
+        'collection': ma.URLFor('userlistresource')
+    })
+
+
+class UserExposeSchema(ma.Schema):
+    class Meta:
+        fields = ('id',
+                  'email',
+                  '_links')
+        exclude = ('password',)
+
     _links = ma.Hyperlinks({
         'self': ma.URLFor('useritemresource', instance_id='<id>'),
         'collection': ma.URLFor('userlistresource')

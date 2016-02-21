@@ -4,14 +4,15 @@
 from __future__ import (absolute_import, division,
                         print_function, unicode_literals)
 
-from . import db, ma, CRUDMixin, TimestampMixin, UserSchema
+from base import db, ma
+from base.models import CRUDMixin, TimestampMixin, UserExposeSchema
 
 
 class Post(db.Model, CRUDMixin, TimestampMixin):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), nullable=False)
     content = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
         return '<{class_name}({title})>'.format(class_name=self.__class__.__name__, name=self.title)
@@ -31,8 +32,8 @@ class PostSchema(ma.Schema):
                   'author',
                   '_links')
 
-    author = ma.Nested(UserSchema)
+    author = ma.Nested(UserExposeSchema)
     _links = ma.Hyperlinks({
-        'self': ma.URLFor('useritemresource', instance_id='<id>'),
-        'collection': ma.URLFor('userlistresource')
+        'self': ma.URLFor('postitemresource', instance_id='<id>'),
+        'collection': ma.URLFor('postlistresource')
     })

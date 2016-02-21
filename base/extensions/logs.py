@@ -6,6 +6,8 @@ from __future__ import (absolute_import, division, print_function,
 
 import logging
 
+__all__ = ['init_logs']
+
 
 def init_logs(self):
     handler = logging.FileHandler(self.app.config.get('LOG', 'var/log/dev.log'))

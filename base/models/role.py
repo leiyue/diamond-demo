@@ -9,6 +9,8 @@ from flask.ext.security import RoleMixin
 from ._mixins import CRUDMixin, TimestampMixin
 from .. import db, ma
 
+__all__ = ['Role', 'RoleSchema']
+
 
 class Role(db.Model, RoleMixin, CRUDMixin, TimestampMixin):
     id = db.Column(db.Integer(), primary_key=True)

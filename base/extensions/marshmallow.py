@@ -6,6 +6,8 @@ from __future__ import (absolute_import, division, print_function,
 
 from flask.ext.marshmallow import Marshmallow
 
+__all__ = ['ma', 'init_marshmallow']
+
 ma = Marshmallow()
 
 

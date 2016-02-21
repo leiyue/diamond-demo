@@ -6,4 +6,4 @@ from __future__ import (absolute_import, division,
 
 from base.views.admin._mixin import *  # noqa
 
-from .post import AdminPost
+from .post import PostAdmin

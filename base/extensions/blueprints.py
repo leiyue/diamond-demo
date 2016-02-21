@@ -4,6 +4,8 @@
 from __future__ import (absolute_import, division, print_function,
                         with_statement, unicode_literals)
 
+__all__ = ['init_blueprints']
+
 
 def init_blueprints(self):
     from ..views import public_blueprint

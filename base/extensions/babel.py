@@ -6,6 +6,8 @@ from __future__ import (absolute_import, division, print_function,
 
 from flask.ext.babelex import Babel
 
+__all__ = ['babel', 'init_babel']
+
 babel = Babel()
 
 

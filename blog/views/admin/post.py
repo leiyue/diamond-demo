@@ -7,15 +7,16 @@ from __future__ import (absolute_import, division,
 from . import AdminUserModelView
 
 
-class AdminPost(AdminUserModelView):
+class PostAdmin(AdminUserModelView):
     page_size = 30
     can_create = True
-    can_delete = False
+    can_delete = True
     can_edit = True
     column_display_pk = False
-    column_filters = ['title']
-    column_exclude_list = ('created_at', 'updated_at',)
+    column_list = ('title', 'author', 'created_at', 'updated_at',)
+    column_exclude_list = ('content',)
     column_default_sort = ('id', False)
+    column_filters = ('title', 'content',)
     column_searchable_list = ('title', 'content',)
     column_labels = dict(
         id='ID',
@@ -25,6 +26,18 @@ class AdminPost(AdminUserModelView):
         created_at='创建时间',
         updated_at='更新时间')
     # form_columns = ('name', 'description', 'created_at', 'updated_at', 'users')
+
+    # use WYSIWIG text field
+    # form_overrides = dict(content=CKTextAreaField)
+
+    form_widget_args = dict(
+        content={'class': 'form-control ckeditor'},
+        created_at=dict(disabled=True),
+        updated_at=dict(disabled=True)
+    )
+
+    create_template = 'admin/model/create_post.html'
+    edit_template = 'admin/model/edit_post.html'
     #
     # column_descriptions = dict(
     #     name='推荐使用英文名称，兼容性更强',

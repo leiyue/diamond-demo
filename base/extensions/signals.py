@@ -6,6 +6,8 @@ from __future__ import (absolute_import, division, print_function,
 
 from flask.ext.security import user_registered
 
+__all__ = ['init_signals']
+
 
 def init_signals(self):
     @user_registered.connect_via(self.app)

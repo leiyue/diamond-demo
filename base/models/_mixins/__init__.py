@@ -3,4 +3,3 @@
 
 from .crud import CRUDMixin
 from .timestamp import TimestampMixin
-

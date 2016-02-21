@@ -1,0 +1,13 @@
+{% extends 'admin/model/edit.html' %}
+
+{% block tail %}
+    {{ super() }}
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.5.4/ckeditor.js"></script>
+    <script type="text/javascript">
+        CKEDITOR.replace('content', {
+            image_previewText: '.',
+            filebrowserBrowseUrl: '/ck_browse',
+            filebrowserUploadUrl: '/ck_upload'
+        });
+    </script>
+{% endblock %}

@@ -8,6 +8,8 @@ import datetime
 
 from ... import db
 
+__all__ = ['TimestampMixin']
+
 
 class TimestampMixin(object):
     """Mixin that adds two Timestamp columns."""
